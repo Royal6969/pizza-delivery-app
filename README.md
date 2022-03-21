@@ -6,6 +6,7 @@ npm run dev
 
 ## To follow my commit changes
 https://github.com/Royal6969/pizza-delivery-app/commits/main
+https://pizza-delivery-app-delta.vercel.app/
 
 ## First steps
 Traditionally, we start with a default template that you can see in index.js.
@@ -86,4 +87,10 @@ in 0 because 0 will be the main image (first item (image) in slider)
 
 To learn more about the useState() hook, visit...
 https://www.coffeeclass.io/articles/nextjs-usestate
+
+## ProductList and ProductCard components
+Once again, we start creating two new component like jsx files,
+and two new modules.css, connect both component between them,
+(insert a few ProductCard inside the ProductList and insert the ProductList under the Slider in the index.js)
+The rest is pure html and css.
 
