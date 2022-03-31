@@ -57,9 +57,10 @@ and inside them (between them), we can see the word "homepage" which we wrote be
 ## 👶 Create our first example page
 Go ahead into pages folder, and create a new file, called "about" for example.
 I recommend you to install a VS extension that provides you a React syntax snippet to start coding faster any component or page.
-So I have it, and if a just write "raf" I get a snippet called "react arrow function export component".
+So I have it, and if a just write "rafce" I get a snippet called "react arrow function export component".
 Now, if you go to your browser, and in the URL you write a slash and "about", you will go directly into our new about component,
 wow! it looks like something magic...
+Note: Pages components has to be named with lower initial letter.
 
 ## 🎨 For the css ...
 We are going to use the css modules.
@@ -69,14 +70,14 @@ Now we back to Navbar.jsx to import this new style file:
 import styles from "../styles/Navbar.module.css"
 And now we can set styles in our html tags with className={styles.container}
 
-## 0️⃣ Lets start with the Navbar
+## 0️⃣ Lets start with the Navbar 🗺️
 Note for <Image> tag.
 It's very common and a noob mistake that we experiment an error like this:
 Server Error
 Error: Image with src "/img/telephone.png" must use "width" and "height" properties or "layout='fill'" property.
 This error says us we have to define a width/height for the Image
 
-## 1️⃣ Slider component
+## 1️⃣ Slider component 🎞️
 Remember to start with the basic template provides by the snnipet "raf" React Arrow Function Export Component, and now remember to call it in de Index.js, under the <Head>.
 
 To go next/prev image in slider, I need to define a stateHook for an index.
@@ -90,13 +91,13 @@ in 0 because 0 will be the main image (first item (image) in slider)
 To learn more about the useState() hook, visit...
 https://www.coffeeclass.io/articles/nextjs-usestate
 
-## 2️⃣ ProductList and ProductCard components
+## 2️⃣ ProductList and ProductCard components 📋
 Once again, we start creating two new component like jsx files,
 and two new modules.css, connect both component between them,
 (insert a few ProductCard inside the ProductList and insert the ProductList under the Slider in the index.js)
 The rest is pure html and css.
 
-## 3️⃣ Product Page Design
+## 3️⃣ Product Page Design 🍕
 Now, it's time to get the product id to go into its details.
 Inside pages folder, let's create a new folder called "product",
 and inside it, create the id generator file (with jsx extension) with the name between squeare brackets,
@@ -110,9 +111,16 @@ so we need to get the price for each size and pizza,
 and we get it using again a stateHook, the "useState",
 but this time, from a Click event !
 
-## 4️⃣
+## 4️⃣ Shopping Cart Design 🛒
+I create a new jsx file in Pages folder, without its own folder,
+because it would be an independent page.
+Like you alredy know, let's start with the "rafce" snippet,
+and create also its css module, and import it.
+This page will have two parts,
+first, the purchase resume info,
+second, the checkout container.
 
-## 5️⃣
+## 5️⃣ Order Tracking Page Design
 
 ## 6️⃣
 
