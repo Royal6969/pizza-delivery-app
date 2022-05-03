@@ -10,7 +10,7 @@ const Footer = () => {
         </div>
         <div className={styles.item}>
           <div className={styles.card}>
-            <h2 className={styles.motto}>OH YES, WE DID. THE CARAZO PIZZA, WELL BAKED SLICE OF PIZZA.</h2>
+            <h2 className={styles.motto}>OH YES, WE DID. THE SUPER PIZZA, WELL BAKED SLICE OF PIZZA.</h2>
           </div>
 
           <div className={styles.card}>

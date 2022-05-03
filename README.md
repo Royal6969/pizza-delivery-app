@@ -6,6 +6,7 @@ npm run dev
 
 ## ⏱ To follow my commit changes
 https://github.com/Royal6969/pizza-delivery-app/commits/main
+
 https://pizza-delivery-app-delta.vercel.app/
 
 ## 👓 First steps
@@ -121,6 +122,15 @@ first, the purchase resume info,
 second, the checkout container.
 
 ## 5️⃣ Order Tracking Page Design
+I create a new folder called "orders" and inside it, 
+like the productPage, we create the [id].jsx file (rename it inside the file to Order),
+because we're going to fetch data according the id.
+In this part, we have to create manually de different status for the order:
+ - done
+ - inProgress
+ - unDone
+It will change automatically with an index and with three simple conditions.
+Note: Pay attention to the Order.module.css
 
 ## 6️⃣
 
