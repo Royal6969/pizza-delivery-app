@@ -92,11 +92,15 @@ in 0 because 0 will be the main image (first item (image) in slider)
 To learn more about the useState() hook, visit...
 https://www.coffeeclass.io/articles/nextjs-usestate
 
+![slider](./public/img/readme/slider.png)
+
 ## 2️⃣ ProductList and ProductCard components 📋
 Once again, we start creating two new component like jsx files,
 and two new modules.css, connect both component between them,
 (insert a few ProductCard inside the ProductList and insert the ProductList under the Slider in the index.js)
 The rest is pure html and css.
+
+![product-list](./public/img/readme/product-list.png)
 
 ## 3️⃣ Product Page Design 🍕
 Now, it's time to get the product id to go into its details.
@@ -112,6 +116,8 @@ so we need to get the price for each size and pizza,
 and we get it using again a stateHook, the "useState",
 but this time, from a Click event !
 
+![product-page](./public/img/readme/product-page.png)
+
 ## 4️⃣ Shopping Cart Design 🛒
 I create a new jsx file in Pages folder, without its own folder,
 because it would be an independent page.
@@ -120,6 +126,8 @@ and create also its css module, and import it.
 This page will have two parts,
 first, the purchase resume info,
 second, the checkout container.
+
+![cart-page](./public/img/readme/cart.png)
 
 ## 5️⃣ Order Tracking Page Design
 I create a new folder called "orders" and inside it, 
@@ -132,10 +140,25 @@ In this part, we have to create manually de different status for the order:
 It will change automatically with an index and with three simple conditions.
 Note: Pay attention to the Order.module.css
 
-## 6️⃣
+![orders-page](./public/img/readme/orders-page.png)
 
-## 8️⃣
+## 6️⃣ Responsive Design
+Let's make the design responsive, and to start,
+you have to enable the "inspect view" in Chrome (or other browser),
+and press the "mobile view" button at the top right screen,
+and select a device mobile.
 
-## 9️⃣
+![No Responsive Design]()
 
-## 1️⃣0️⃣ 
+Note: you can find lot of useful information in next link:
+
+https://www.lambdatest.com/blog/how-to-use-css-breakpoints-for-responsive-design/
+
+
+# Frontend finished !
+In next steps, we're going to create our own API,
+we're going to add our products,
+we will be able to delete them, update them, 
+and a user will be able to buy any products,
+and we're going to activate our checkout button,
+with an official payment method...
