@@ -36,7 +36,7 @@ For example, suppose that your page needs to pre-render frequently updated data 
 
 getServerSideProps is similar to getStaticProps, but the difference is that getServerSideProps is run on every request instead of on build time.
 
-## 📚 To learn more Next.js basic concepts ...
+👨‍🏫 To learn more Next.js basic concepts:
 https://nextjs.org/learn/foundations/about-nextjs?utm_source=next-site&utm_medium=homepage-cta&utm_campaign=next-website
 
 https://nextjs.org/docs/basic-features/pages
@@ -61,7 +61,8 @@ I recommend you to install a VS extension that provides you a React syntax snipp
 So I have it, and if a just write "rafce" I get a snippet called "react arrow function export component".
 Now, if you go to your browser, and in the URL you write a slash and "about", you will go directly into our new about component,
 wow! it looks like something magic...
-Note: Pages components has to be named with lower initial letter.
+
+⚠️ Note: Pages components has to be named with lower initial letter. ⚠️
 
 ## 🎨 For the css ...
 We are going to use the css modules.
@@ -74,10 +75,9 @@ And now we can set styles in our html tags with className={styles.container}
 # Let's start with frontend
 
 ## 0️⃣ Navbar component 🗺️
-Note for <Image> tag.
+Don't use <img> tag, use better <Image> tag provides by Next.js.
 It's very common and a noob mistake that we experiment an error like this:
-Server Error
-Error: Image with src "/img/telephone.png" must use "width" and "height" properties or "layout='fill'" property.
+Server Error --> Error: Image with src "/img/telephone.png" must use "width" and "height" properties or "layout='fill'" property.
 This error says us we have to define a width/height for the Image
 
 ## 1️⃣ Slider component 🎞️
@@ -86,12 +86,12 @@ Remember to start with the basic template provides by the snnipet "raf" React Ar
 To go next/prev image in slider, I need to define a stateHook for an index.
 The useState hook lets you manage state throughout your application.
 
-Note: Not forget to import it --> import { useState } from 'react'
+⚠️ Note: Not forget to import it --> import { useState } from 'react' ⚠️
 
 The stateHook will begin in 0 --> const [index, setIndex] = useState(0)
 in 0 because 0 will be the main image (first item (image) in slider)
 
-To learn more about the useState() hook, visit...
+👨‍🏫 To learn more about the useState() hook, visit:
 https://www.coffeeclass.io/articles/nextjs-usestate
 
 ![slider](./public/img/readme/slider.png)
@@ -140,7 +140,8 @@ In this part, we have to create manually de different status for the order:
  - inProgress
  - unDone
 It will change automatically with an index and with three simple conditions.
-Note: Pay attention to the Order.module.css
+
+⚠️ Note: Pay attention to the Order.module.css ⚠️
 
 ![orders-page](./public/img/readme/orders-page.png)
 
@@ -156,8 +157,7 @@ before...
 ![Responsive Design](./public/img/readme/responsive-2.png)
 ... and after.
 
-Note: you can find lot of useful information in next link:
-
+👨‍🏫 To learn more about breakpoints for responsive designs:
 https://www.lambdatest.com/blog/how-to-use-css-breakpoints-for-responsive-design/
 
 
@@ -227,15 +227,31 @@ MONGO_URL = paste your secret key ...
 MONGO_URL = mongodb+srv://user:password@cluster.mongodb.net/databaseName?retryWrites=true&w=majority
 (and replace the example user, password and databaseName name for your admin user, his password and the database name)
 
-Note: you have the 
+⚠️ Note: you have to write same database name in .env file and in MongoDB Atlas, else it won't works. ⚠️
 
 ![](./public/img/readme/mongodb-connect-1.png)
 ![](./public/img/readme/mongodb-connect-2.png)
 ![](./public/img/readme/mongodb-connect-3.jpg)
 
-Note: Don't forget to restart the application when you create and add your first secret key in an env file.
+⚠️ Note: Don't forget to restart the application when you create and add your first secret key in an env file. ⚠️
 
-Now you need to install mongoose with npm:
+What is an .env file ??
+env file contains the individual user environment variables that override the variables set in the /etc/environment file. 
+You can customize your environment variables as desired by modifying your .env file.
+env files allow you to put your environment variables inside a file. 
+You just create a new file called .env in your project and slap your variables in there on different lines. 
+To read these values, there are a couple of options, but the easiest is to use the dotenv package from npm.
+
+👨‍🏫 To learn more about .env file:
+https://www.youtube.com/watch?v=KJE4LtAxLEw&ab_channel=Bitfumes
+
+👨‍🏫 To learn about dotenv library:
+https://www.youtube.com/watch?v=hZUNMYU4Kzo&ab_channel=dcode
+
+👨‍🏫 To learn how to hide api keys in .env when push code to github:
+https://www.youtube.com/watch?v=17UVejOw3zA&ab_channel=TheCodingTrain
+
+Now, you need to install mongoose with npm to connect our project with MongoDB Atlas:
 
 - npm install mongoose
 
@@ -426,7 +442,7 @@ export default async function handler(req, res) { // we make this function async
 }
 ```
 
-Note: In same index.js file we made the Post method before... now Get method would be...
+⚠️ Note: In same index.js file we made the Post method before... now Get method would be... ⚠️
 
 ```js
 import dbConnect from "../../../util/mongodb-connection" // to use MongoDB
@@ -495,7 +511,8 @@ I'm going to insert three example product objects manually in MongoDB Atalas.
 ![](./public/img/readme/mongodb-insert-document-manually.png)
 
 Create two more documents till hace pizza-1, pizza-2 and pizza-3.
-Note: Be careful with fields' types
+
+⚠️ Note: Be careful with fields' types ⚠️
 
 ```json
 {
@@ -534,6 +551,7 @@ There is an absolute function that we can fetch data using Server Side Rendering
 
 - npm install axios
 
+What is Axios ??
 Axios is a promise-based HTTP Client for node. js and the browser. It is isomorphic 
 (= it can run in the browser and nodejs with the same codebase). 
 On the server-side it uses the native node. js http module, 
@@ -542,6 +560,9 @@ while on the client (browser) it uses XMLHttpRequests.
 Axios is a promise based HTTP client for the browser and Node. js. 
 Axios makes it easy to send asynchronous HTTP requests to REST endpoints and perform CRUD operations. 
 It can be used in plain JavaScript or with a library such as Vue or React.
+
+👨‍🏫 To learn more about Axios, visit its official website:
+https://axios-http.com/docs/intro
 
 Now, in main index.js file in pages folder ...
 
@@ -647,7 +668,7 @@ in component we want to make a link to another component,
 we need to import Link from Next,
 and wrap between Link tags the element we want the user touch to navigate.
 
-Note: Be careful with extra spaces inside Link tags ... Next.js will undertand it like you're defining more children and it is not allow.
+⚠️ Note: Be careful with extra spaces inside Link tags ... Next.js will undertand it like you're defining more children and it is not allow. ⚠️
 https://stackoverflow.com/questions/61651497/next-js-error-react-children-only-expected-to-receive-a-single-react-element-c
 
 Our first Link will be in ProductCard.jsx, for the pizza image,
@@ -899,4 +920,291 @@ after in else part,
 we're going to use filter method,
 if this item and id is not equal to this option id,
 just keep them inside if they are equal just removing using this filter
+
+## How to pass products to cart component and how it manages them by itself 📦
+
+Whenever we click AddToCart button, shopping cart button has to update its badge (products counter in order),
+to handle that, we have three ways:
+
+1. Use "prop drilling" (not a good idea)
+2. Use a context API
+3. Use state management libraries (that's what we're going to do)
+
+For the third option, we're going to use Redux Toolkit.
+
+- npm install @reduxjs/toolkit
+- npm install redux
+- npm install react-redux
+
+⚠️ Note: You need to install these three, the toolkit, the core, and compatibility with React (remember Next.js comes from React.js) ⚠️
+
+What is Redux ??
+Redux is a predictable state container designed to help you write JavaScript apps 
+that behave consistently across client, server, and native environments and are easy to test. 
+While it's mostly used as a state management tool with React, you can use it with any other JavaScript framework or library.
+
+In simple words, Redux is a store to store and management the state of the variables in your app.
+https://medium.com/swlh/what-is-redux-b16b42b33820
+
+👨‍🏫 To learn more about Redux and how to use as framework too, visit its official website:
+https://redux.js.org/introduction/installation
+
+And the official website in collaboration with React:
+https://react-redux.js.org/introduction/getting-started
+
+Now, you have to create a new folder called redux in root level project folder,
+and let's create our first slice file, called cartSlice.js
+
+What is a slice ??
+A "slice" is a collection of Redux reducer logic and actions for a single feature in your app, 
+typically defined together in a single file. 
+The name comes from splitting up the root Redux state object into multiple "slices" of state.
+
+👨‍🏫 To learn more about slices in Redux:
+https://redux.js.org/tutorials/essentials/part-2-app-structure#:~:text=A%20%22slice%22%20is%20a%20collection,multiple%20%22slices%22%20of%20state.
+
+Now in the new slice file, we have to create a cart slice, with a name, with a initial state and with its reducer...
+In conclusion, we're going to pass a product to cart as a payload and we're going to take the quantity and the price.
+After, when we make our payments, we're going to go to the order page and we're going to reset our cart here so it's going to be 0 again
+
+You can understand the slice like a piece of product's state, or a component's action which change the product's state.
+
+and ... what is a reducer ??
+A reducer is a function that determines changes to an application's state. 
+It uses the action it receives to determine this change (manipulates that data when it recieves an action).
+The reducer is a pure function that accepts 2 parameters: the current state and an action object. 
+Depending on the action object, the reducer function must update the state in an immutable manner, and return the new state.
+
+```js
+import { createSlice } from "@reduxjs/toolkit";
+
+const cartSlice = createSlice({
+  name: "cart",
+  initialState: {
+    products: [],
+    total: 0
+  },
+  reducers: {
+    addProduct: (state, action) => {
+      state.products.push(action.payload) // we're going to pass our pizza details as payload 
+      state.total += action.payload.price * action.payload.quantity; // at beginning out total number will be 0, 
+    },
+    reset: (state) => {
+      state = initialState;
+    }
+  }
+});
+
+export const { addProduct, reset } = cartSlice.actions;
+export default cartSlice.reducer;
+```
+
+## How to use the slice and its reducer ⚙️
+
+In the redux folder we created before, now create a new file called store.js and inside it, 
+create a default function to call the cart reducer before:
+
+```js
+import { configureStore } from "@reduxjs/toolkit";
+import cartReducer from "./cartSlice";
+
+export default configureStore({
+    reducer: {
+        cart: cartReducer
+    }
+});
+```
+
+How we're going to use this store.js ??
+I want to reach my cart slice and my actions everywhere inside my application,
+so if I go to pages, and to _app.js file, I have to wrap my application with the redux provider:
+
+```js
+import Layout from '../components/Layout';
+import '../styles/globals.css';
+import store from '../redux/store';
+import { Provider } from 'react-redux';
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <Provider store={store}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </Provider>
+  );
+}
+
+export default MyApp
+```
+
+All right, we're able to this data from anywhere in our app.
+
+## How to update the badget's counter in shopping cart icon in navbar 🔢
+
+Let's go to our slice again, and let's add one more variable called quantity.
+
+```js
+import { createSlice } from "@reduxjs/toolkit";
+
+const cartSlice = createSlice({ // I'm going to create a slice method
+  // we have to create a cart slice, with a name, with a initial state and with its reducer
+  name: "cart",
+  initialState: {
+    products: [],
+    quantity: 0,
+    total: 0
+  },
+  reducers: {
+    // we're going to pass a product to cart as a payload and we're going to take the quantity and the price
+    addProduct: (state, action) => {
+      state.products.push(action.payload) // we're going to pass our pizza details as payload 
+      state.quantity += 1; // when user add a product, it's going to increase the quantity
+      state.total += action.payload.price * action.payload.quantity; // at beginning out total number will be 0, 
+    },
+    // when we make our payments, we're going to go to the order page and we're going to reset our cart here so it's going to be 0 again
+    reset: (state) => {
+      state = initialState;
+    }
+  }
+});
+
+export const { addProduct, reset } = cartSlice.actions;
+export default cartSlice.reducer;
+```
+
+Now we have to go to navbar component, and firtly, import a react-redux's hook called useSelector,
+create a new const for the quantity and set it in the counter
+
+```js
+import Image from 'next/image'
+import React from 'react'
+import styles from "../styles/Navbar.module.css"
+import { useSelector } from 'react-redux';
+
+
+const Navbar = () => {
+
+  const quantity = useSelector((state) => state.cart.quantity);
+
+  return (
+    <div>
+      {/* rest of cart's content that I've not copied */}
+
+      <div className={styles.item}>
+        <div className={styles.cart}>
+          <Image src="/img/cart.png" alt='' width="30px" height="30px" />
+          <div className={styles.counter}>{quantity}</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+Now we can see, in product view ([id].jsx), the initial counter is 0, 
+and we want that we click the AddToCart button, it's going to dispatch a product reducer,
+and it's going to increase the number and the total order price.
+
+To do that, we need to go to [id].jsx file (product) and in AddToCart buuton, call another function:
+
+```js
+  <button 
+    className={styles.button}
+    onClick={handleClick}
+  >
+    Add to Cart
+  </button>  
+```
+
+Now we have to import another react-redux's hook called useDispatch, and import the action in slice you want to use too,
+```js
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../redux/cartSlice';
+```
+declare a const called dispatch = useDispatch(); to use its actions,
+```js
+const dispatch = useDispatch();
+```
+and the handleClick would be:
+```js
+const handleClick = () => {
+    dispatch(
+      addProduct( // my action name
+        {
+          ...product, // ellipsis spreads what product includes inside it... it's the action.payload
+          extras,
+          price,
+          quantity
+        }
+      )
+    )
+  }
+```
+
+⚠️ Note: don't forget, in navbar.jsx, to wrap between <Link> tags provides by Next.js, the shopping cart button ⚠️
+```js
+<Link href="/cart" passHref></Link>
+```
+
+👨‍🏫 To learn more about react-redux hooks:
+https://react-redux.js.org/api/hooks
+
+## Let's use all information of products selected in cart page 🛒
+
+Go to cart.jsx and once again, we're going to use dispatch and selector from react-redux,
+so import them, declare a const for both, and map the cart looking for its products:
+
+```js
+// more imports here
+import { useDispatch, useSelector } from 'react-redux'
+
+const Cart = () => {
+
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+
+  return (
+
+      {/* table starts */}
+
+        {/* tables' fields */}
+          {cart.products.map((product) => (
+            <tr className={styles.tr} key={product._id}>
+            <td>
+              <div className={styles.imgContainer}>
+                <Image src={product.image} layout="fill" objectFit="cover" alt="" />
+              </div>
+            </td>
+            <td>
+              <span className={styles.name}>{product.title}</span>
+            </td>
+            <td>
+              <span className={styles.extras}>
+                {product.extras.map((extra) => (
+                  <span key={extra._id}>{extra.text}, </span>
+                ))}
+              </span>
+            </td>
+            <td>
+              <span className={styles.price}>{product.price}€</span>
+            </td>
+            <td>
+              <span className={styles.quantity}>{product.quantity}</span>
+            </td>
+            <td>
+              <span className={styles.total}>{product.price * product.quantity}€</span>
+            </td>
+          </tr>
+          ))} 
+        {/* table ends */}
+
+      {/* subtotal, discount, total and checkout here */}
+  )
+}
+
+export default Cart
+```
+
+⚠️ Note: for extras (ingredients) we need another map()... it's a map inside a map! ⚠️
 

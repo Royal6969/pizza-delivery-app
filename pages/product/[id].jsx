@@ -3,6 +3,8 @@ import React from 'react'
 import styles from '../../styles/Product.module.css'
 import { useState } from 'react'
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../redux/cartSlice';
 
 const Product = ({ product }) => { // <-- props which function will use
 
@@ -13,6 +15,7 @@ const Product = ({ product }) => { // <-- props which function will use
   const [extras, setExtras] = useState([]); // empty array for when user refresh page, any ingredients are selected
 
   const [quantity, setQuantity] = useState(1); // start in 1 becasuse is the minimum allowed to buy
+  const dispatch = useDispatch();
 
   const changePrice = (number) => {
     setPrice(price + number);
@@ -65,6 +68,20 @@ const Product = ({ product }) => { // <-- props which function will use
 
   // console.log(extras);  // ingredients test
   // console.log(product); // object test
+
+  // I'm going to dispatch my cart actions
+  const handleClick = () => {
+    dispatch(
+      addProduct( // my action name
+        {
+          ...product, // ellipsis spreads what product includes inside it... it's the action.payload
+          extras,
+          price,
+          quantity
+        }
+      )
+    )
+  }
 
   /*
   const product = { // static example object for frontend test at first
@@ -144,7 +161,12 @@ const Product = ({ product }) => { // <-- props which function will use
               defaultValue={1} 
               className={styles.quantity} 
             />
-            <button className={styles.button}>Add to Cart</button>
+            <button 
+              className={styles.button}
+              onClick={handleClick}
+            >
+              Add to Cart
+            </button>
           </div>          
         </div>
     </div>
