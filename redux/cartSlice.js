@@ -17,7 +17,9 @@ const cartSlice = createSlice({ // I'm going to create a slice method
     },
     // when we make our payments, we're going to go to the order page and we're going to reset our cart here so it's going to be 0 again
     reset: (state) => {
-      state = initialState;
+      state.products = [];
+      state.quantity = 0;
+      state.total = 0; 
     }
   }
 });

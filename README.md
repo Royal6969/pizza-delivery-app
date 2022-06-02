@@ -1208,3 +1208,197 @@ export default Cart
 
 ⚠️ Note: for extras (ingredients) we need another map()... it's a map inside a map! ⚠️
 
+## Add a payment method. PayPal button 💳
+
+- npm install @paypal/react-paypal-js
+
+Let's take an example from PayPal GitHub documentation:
+https://paypal.github.io/react-paypal-js/?path=/docs/example-paypalbuttons--default
+
+Basically, we're going to give our options, like amount, our currency and our button style,
+and after that, we're going to create a button wrapper,
+and this library uses context API inside, and it's take our options and creates a paypal button,
+and we're going to use this button in our component.
+
+See all code what I added from paypal-github web to my cart.jsx file.
+link here
+
+![](./public/img/readme/cart-paypal-1.png)
+
+But it looks extrange, and I want to enable paypal button after user clicks checkout button,
+and also we can create another payment method which is cash on delivery.
+To do that, I have to create a new state hook
+
+```js
+const [open, setOpen] = useState(false);
+```
+
+And just before checkout button, let's create a condition,
+if open is true, show me paypal button, else just show me checkout button
+
+```js
+{open ? (
+  <div className={styles.paymentMethods}>
+    <button className={styles.payButton}>CASH ON DELIVERY</button>
+      <PayPalScriptProvider
+        options={{
+          "client-id": "test",
+          components: "buttons",
+          currency: "USD",
+          // "disable-funding": "credit,card,p24", // to disable any other payment methods which collaborates with paypal
+        }}
+      >
+        <ButtonWrapper currency={currency} showSpinner={false} />
+        </PayPalScriptProvider>
+    </div>
+) : (
+  <button onClick={() => setOpen(true)} className={styles.button}>
+    CHECKOUT NOW
+  </button>
+)}
+```
+
+![](./public/img/readme/cart-paypal-2.png)
+
+⚠️ Note: there are new styles for the new buttons in cart.module.css ⚠️
+
+⚠️ Note: it's possible that you can experiment an error displaying paypal button after click in checkout button ⚠️
+Access to XMLHttpRequest at 'https://www.sandbox.paypal.com/xoplatform/logger/api/logger' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+To get our personal paypal client-id, you have to create an account in PayPal Developer:
+https://developer.paypal.com/home
+
+1. Create a sandbox (select business account and your country)
+2. Create a second one (selecting personal account)
+3. Create an application
+4. Paste in your code your client-id
+
+![](./public/img/readme/paypal-process-1.png)
+![](./public/img/readme/paypal-process-2.png)
+![](./public/img/readme/paypal-process-3.png)
+
+I've tested the payment and it's works!
+
+video here
+
+## What this payment process return us? Creating an order.
+
+If we go to onApprove in <PayPalButtons /> (when the payment is accepted),
+we can get the details:
+
+```js
+onApprove={function (data, actions) {
+  return actions.order.capture().then(function (details) {
+    // Your code here after capture the order
+    console.log(details);
+  })
+}}
+```
+
+![](./public/img/readme/order-details-1.png)
+
+With this information we're able yo create an order and send our details after payment,
+so let's go to create our API (another index.js and [id].js) in orders folder and take care of order enpoint.
+Can you remember the steps ??
+
+0. Create an index.js and [id].js files, and go to index.js
+1. Import dbConnect and Order model
+2. Create handler function with (req, res)
+3. Inside it create request method
+4. Call dbConnect() with await before for the promise
+5. Create conditions for GET and POST methods
+6. Copy all that and paste it in [id].js
+7. In [id].js change POST method for PUT and add DELETE
+8. Also add the query:{id} method in const for req
+9. Export the handler in both files
+10. In index.js, inside POST condition, create try/catch like we made before for products
+
+index.js
+```js
+import dbConnect from '../../../util/mongodb-connection'
+import Order from '../../../models/Order'
+
+const handler = async (req, res) => {
+
+  const { method } = req;
+
+  await dbConnect();
+
+  if (method === "GET") {
+    try {
+      const orders = await Order.find();
+      res.status(200).json(orders);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  
+  if (method === "POST") {
+    try {
+      const order = await Order.create(req.body);
+      res.status(201).json(order);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+}
+
+export default handler;
+```
+
+Now come back to cart.jsx and in <PayPalButtons /> onApprove, we have to return an order creation, but for that, we have to create a function to create an order:
+
+```js
+const router = useRouter();
+  
+  const createOrder = async (data) => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/orders", data); // what API use to create the order and the data sent
+       
+      // control response
+      res.status === 201 && router.push("/orders/" + res.data._id); // if response load status equals to 201 just redirect customer to another page, and for redirect we have to use the hook called useRouter
+      dispatch(reset());
+    
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  onApprove={function (data, actions) {
+    return actions.order.capture().then(function (details) {
+      // Your code here after capture the order
+      // console.log(details); // to check we're receiving customer data
+            
+      const shipping = details.purchase_units[0].shipping; // including customer name and address
+            
+      createOrder({ // go to order model file to remember the fields
+        customer: shipping.name.full_name,
+        address: shipping.address.address_line_1,
+        total: cart.total,
+        method: 1
+      });
+    });
+  }}
+```
+
+See file commit changes to see full code in cart.jsx file.
+
+Now we have to come back yo cartSlice.js to remodel the order reset action:
+```js
+// when we make our payments, we're going to go to the order page and we're going to reset our cart here so it's going to be 0 again
+  reset: (state) => {
+    state.products = []
+    state.quantity = 0;
+    state.total = 0; 
+    }
+```
+
+Now, when I go to test the payment again to create the new order with payment data, it isn't redirecting me to order page...
+Inspect section in Chrome says me it's an AxiosError with code 500 (internal server error) ERR_BAD_RESPONSE
+https://github.com/Royal6969/pizza-delivery-app/issues/1
+
+## Order page. Getting order information to make its view
+
+We have to go to [id].jsx in orders page, to create once again the SSR function. (don't forget to import axios)
+After that, set "order" as the main prop in function, and now you can interpolate order's fields.
+

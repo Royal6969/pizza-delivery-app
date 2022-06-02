@@ -10,7 +10,7 @@ export default async function handler(req, res) { // we make this function async
   // to handle that let's structure with this:
   const { method } = req;
 
-  dbConnect();
+  await dbConnect();
 
   if (method === "GET") {
     try {
