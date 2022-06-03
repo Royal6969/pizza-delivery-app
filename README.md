@@ -55,6 +55,9 @@ and we will wrap it with our Layout component.
 If we serve the app in this moment, we will see in our browser that we can see the navbar at top, the footer at bottom, 
 and inside them (between them), we can see the word "homepage" which we wrote before in index.js
 
+👨‍🏫 To learn more about props:
+https://www.youtube.com/watch?v=kHJSNFU7H4U&t=2s&ab_channel=SonnySangha
+
 ## 👶 Create our first example page
 Go ahead into pages folder, and create a new file, called "about" for example.
 I recommend you to install a VS extension that provides you a React syntax snippet to start coding faster any component or page.
@@ -536,6 +539,9 @@ Create two more documents till hace pizza-1, pizza-2 and pizza-3.
 }
 ```
 
+To see how to insert/edit documents manually in MongoDB Atlas:
+https://github.com/Royal6969/pizza-delivery-app/issues/3
+
 ## Fetch data in Next.js with ServerSideRendering and Axios 🔁
 
 If you develop a project in React before,
@@ -921,6 +927,9 @@ we're going to use filter method,
 if this item and id is not equal to this option id,
 just keep them inside if they are equal just removing using this filter
 
+Video test selecting ingredients:
+https://github.com/Royal6969/pizza-delivery-app/issues/4
+
 ## How to pass products to cart component and how it manages them by itself 📦
 
 Whenever we click AddToCart button, shopping cart button has to update its badge (products counter in order),
@@ -1277,9 +1286,10 @@ https://developer.paypal.com/home
 ![](./public/img/readme/paypal-process-2.png)
 ![](./public/img/readme/paypal-process-3.png)
 
-I've tested the payment and it's works!
+I've tested the payment and it works! 
+(if you don't change the const amount value for order.total, the default value is 2€)
 
-video here
+https://github.com/Royal6969/pizza-delivery-app/issues/2
 
 ## What this payment process return us? Creating an order.
 
@@ -1393,12 +1403,12 @@ Now we have to come back yo cartSlice.js to remodel the order reset action:
     }
 ```
 
-Now, when I go to test the payment again to create the new order with payment data, it isn't redirecting me to order page...
-Inspect section in Chrome says me it's an AxiosError with code 500 (internal server error) ERR_BAD_RESPONSE
-https://github.com/Royal6969/pizza-delivery-app/issues/1
+⚠️ Note: Make sure that order fields you defined in order model match with its fields in cart.jsx to create an order ⚠️
 
-## Order page. Getting order information to make its view
-
-We have to go to [id].jsx in orders page, to create once again the SSR function. (don't forget to import axios)
+Now we have to go to [id].jsx in orders page, to create once again the SSR function. (don't forget to import axios)
 After that, set "order" as the main prop in function, and now you can interpolate order's fields.
+
+⚠️ Note: const status value is not 0, now it's order.statuss ⚠️
+
+![](./public/img/readme/first-order-test.png)
 

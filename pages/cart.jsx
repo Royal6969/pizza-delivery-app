@@ -87,7 +87,7 @@ const Cart = () => {
               customer: shipping.name.full_name,
               address: shipping.address.address_line_1,
               total: cart.total,
-              method: 1
+              paymentMethod: 1
             });
           });
         }}

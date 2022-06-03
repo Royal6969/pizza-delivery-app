@@ -18,27 +18,31 @@ const Order = ({ order }) => {
       <div className={styles.left}>
         <div className={styles.row}>
         <table className={styles.table}>
-          <tr className={styles.trTitle}>
-            <th>Order ID</th>
-            <th>Customer</th>
-            <th>Address</th>
-            <th>Total</th>
-          </tr>
+          <tbody>
+            <tr className={styles.trTitle}>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Address</th>
+              <th>Total</th>
+            </tr>
+          </tbody>
 
-          <tr className={styles.tr}>
-            <td>
-            <span className={styles.id}>{order._id}</span>
-            </td>
-            <td>
-              <span className={styles.name}>{order.customer}</span>
-            </td>
-            <td>
-              <span className={styles.address}>{order.address}</span>
-            </td>
-            <td>
-              <span className={styles.total}>{order.total}€</span>
-            </td>
-          </tr>
+          <tbody>
+            <tr className={styles.tr}>
+              <td>
+              <span className={styles.id}>{order._id}</span>
+              </td>
+              <td>
+                <span className={styles.name}>{order.customer}</span>
+              </td>
+              <td>
+                <span className={styles.address}>{order.address}</span>
+              </td>
+              <td>
+                <span className={styles.total}>{order.total}€</span>
+              </td>
+            </tr>
+          </tbody>
         </table>
         </div>
 
