@@ -458,7 +458,7 @@ export default async function handler(req, res) { // we make this function async
   // to handle that let's structure with this:
   const { method } = req;
 
-  dbConnect();
+  await dbConnect();
 
   if (method === "GET") {
     try {
@@ -745,7 +745,7 @@ export default async function handler(req, res) {
       query: { id } // we'll need an ID (it's similar to params, remember?) 
     } = req;
 
-  dbConnect();
+  await dbConnect();
 
   if (method === "GET") {
     try {
@@ -1412,3 +1412,97 @@ After that, set "order" as the main prop in function, and now you can interpolat
 
 ![](./public/img/readme/first-order-test.png)
 
+## Implementing Cash Payment Method 💸
+
+When user clicks in CashOnDelivery button, it's going to open a modal and it's going to ask for name, address and other informations.
+Go to cart.jsx again, to define a new state hook:
+```js
+const [cash, setCash] = useState(false);
+...
+<button className={styles.payButton} onClick={() => setCash(true)}>CASH ON DELIVERY</button>
+```
+
+Now we have to create the modal, so let's create a new jsx file called CashModal.jsx in components folder (and its module.css in styles folder).
+
+Define two state hooks for customer(name) and his address.
+Set customer state hook as a onChange event in the input.
+
+```js
+import React, { useState } from 'react'
+import styles from '../styles/CashModal.module.css'
+
+const CashModal = ({ total, createOrder }) => {
+
+  const [customer, setCustomer] = useState("");
+  const [address, setAddress] = useState("");
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <h1 className={styles.title}>You will pay 12€ after delivery.</h1>
+
+        <div className={styles.item}>
+          <label className={styles.label}>Name Surname</label>
+          <input 
+            type="text" 
+            placeholder="Sergio Díaz" 
+            className={styles.input}
+            onChange={(e) => setCustomer(e.target.value)}
+          />
+        </div>
+
+        <div className={styles.item}> {/* optionally you can add the number field to order model */}
+          <label className={styles.label}>Phone Number</label>
+          <input 
+            type="text"
+            placeholder="651 23 45 67" 
+            className={styles.input}
+          />
+        </div>
+
+        <div className={styles.item}>
+          <label className={styles.label}>Address</label>
+          <textarea
+            rows={5}
+            type="text" 
+            placeholder="Av/ de las Ciencias, n10, 1A" 
+            className={styles.textarea}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </div>
+
+        <button className={styles.button} onClick={handleClick}>
+          Order
+        </button>
+
+      </div>
+    </div>
+  )
+}
+
+export default CashModal
+```
+
+⚠️ Note: Check styles in mi GitHub ⚠️
+
+Go back to cart.jsx to call CashModal component with a condition:
+```js
+{cash && ( // if cash state is true
+  <CashModal total={cart.total} createOrder={createOrder} /> // call to CashModal component and pass order total to create an order ... and them would be the props in CashModal.jsx
+)}
+```
+
+Now let's create the handleClick function in CashModal.jsx:
+
+```js
+const handleClick = () => {
+  createOrder({
+    customer,
+    address,
+    total, 
+    paymentMethod: 0 // 0 was cash on delivery
+  });
+}
+```
+
+s

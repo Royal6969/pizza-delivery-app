@@ -7,11 +7,13 @@ import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from "@pa
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { reset } from '../redux/cartSlice'
+import CashModal from '../components/CashModal';
 
 const Cart = () => {
 
   const cart = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
+  const [cash, setCash] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
   
@@ -165,7 +167,7 @@ const Cart = () => {
 
           {open ? (
             <div className={styles.paymentMethods}>
-              <button className={styles.payButton}>CASH ON DELIVERY</button>
+              <button className={styles.payButton} onClick={() => setCash(true)}>CASH ON DELIVERY</button>
 
               <PayPalScriptProvider
                 options={{
@@ -186,6 +188,10 @@ const Cart = () => {
 
         </div>
       </div>
+
+      {cash && ( // if cash state is true
+        <CashModal total={cart.total} createOrder={createOrder} /> // call to CashModal component and pass order total to create an order
+      )}
 
     </div>
   )

@@ -8,7 +8,7 @@ export default async function handler(req, res) {
       query: { id } // we'll need an ID (it's similar to params, remember?) 
     } = req;
 
-  dbConnect();
+  await dbConnect();
 
   if (method === "GET") {
     try {
