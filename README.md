@@ -1505,4 +1505,249 @@ const handleClick = () => {
 }
 ```
 
-s
+![](./public/img/readme/cash-modal.png)
+
+# 👔 Admin Actions - Management Functionalities 👔
+
+Let's create inside pages folder, anhother folder called admin, and inside it, a new index.jsx file (with its style file).
+
+We're going to have a container and it's going to contain two items,
+first one is going to include our ProductList, and second one will include OrderList.
+(visit my styles folder to see the css)
+
+Now it's time to our favourite step, the SSR function.
+
+```js
+export const getServerSideProps = async () => {
+  const productRes = await axios.get("http://localhost:3000/api/products");
+  const orderRes = await axios.get("http://localhost:3000/api/orders");
+
+  return {
+    props: {
+      orders: orderRes.data,
+      products: productRes.data
+    }
+  }
+}
+```
+
+Now we can set the orders and products props in main function, 
+and create the map function which will get all products, 
+and we must to interpolate its fields to display the products in the view.
+
+```js
+const index = ({ orders, products }) => {
+  return (
+    <div className={styles.container}>
+      <div className={styles.item}>
+        <h1 className={styles.title}>Products</h1>
+
+        <table className={styles.table}>
+          <tbody>
+            <tr className={styles.trTitle}>
+              <th>Image</th>
+              <th>Id</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+          </tbody>
+
+          {products.map((product) => (
+            <tbody key={product._id}>
+              <tr className={styles.trTitle}>
+                <td>
+                  <Image
+                    src={product.image}
+                    width={50}
+                    height={50}
+                    objectFit="cover"
+                    alt=""
+                  />
+                </td>
+                <td>{product._id.slice(0, 5)}...</td>
+                <td>{product.title}</td>
+                <td>{product.prices[0]}€</td>
+                <td>
+                  <button className={styles.button}>Edit</button>
+                  <button className={styles.button}>Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          ))}
+          
+        </table>
+      </div>
+
+      <div className={styles.item}>
+        <h1 className={styles.title}>Orders</h1>
+        
+        <table className={styles.table}>
+            <tbody>
+              <tr className={styles.trTitle}>
+                <th>Id</th>
+                <th>Customer</th>
+                <th>Total</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </tbody>
+
+            <tbody>
+              <tr className={styles.trTitle}>
+                <td>{"9867963764926349284".slice(0, 5)}...</td>
+                <td>Sergio Díaz</td>
+                <td>45€</td>
+                <td>paid</td>
+                <td>preparing</td>
+                <td>
+                  <button className={styles.button}>Next Stage</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  )
+}
+```
+
+![](./public/img/readme/admin-page-products.png)
+
+Now we can do the same for orders. It's time to map de orderList too and interpolate fields.
+The <tbody> for orders must looks like like this:
+
+```js
+const status = ["preparing", "on the way", "delivered"];
+...
+{orderList.map((order) => (
+  <tbody key={order._id}>
+    <tr className={styles.trTitle}>
+      <td>{order._id.slice(0, 5)}...</td>
+      <td>{order.customer}</td>
+      <td>{order.total}€</td>
+      <td>
+        {order.paymentMethod === 0 // if paymentMethod is equal to 0, then render a span with cash word
+          ? <span>cash</span>
+          : <span>paid</span>
+        }
+      </td>
+      <td>{status[order.status]}</td>
+      <td>
+        <button className={styles.button}>Next Stage</button>
+      </td>
+    </tr>
+  </tbody>
+))}
+```
+
+![](./public/img/readme/admin-page-orders.png)
+
+And now, to change the status clicking NextStage button, first we create the handle function for that:
+
+```js
+...
+const handleStatus = async (id) => {
+  const item = orderList.filter((order) => order._id === id)[0]; // first, we have to find the order
+  const currentStatus = item.status; // to save the (current) status for the order found before
+
+  try {
+    // it will return us the updated version of this order
+    const res = await axios.put(
+      "http://localhost:3000/api/orders/" + id,
+      { // we should send here what we're going to change (status)
+        status: currentStatus + 1 // order found before current status +1
+      }
+    );
+
+    setOrderList([
+      res.data, // the updated version of this order
+      ...orderList.filter((order) => order._id !== id) // to delete the previous version of this order
+    ])
+
+  } catch (err) {
+    console.log(err);
+  }
+}
+...
+<button 
+  className={styles.button}
+  onClick={() => handleStatus(order._id)}
+>
+  Next Stage
+</button>
+```
+
+And in its api (api --> orders --> [id].js) check the PUT method:
+
+```js
+if (method === "PUT") {
+  try {
+    const order = await Order.findByIdAndUpdate(id, req.body, // if we do this, it's not going to return to updated order, so to prevent this error...
+      {
+        new: true, // ... we should write here this, to return the nearest version
+      }
+    );
+    res.status(200).json(order);
+    
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+```
+
+And now if you press the NextStage button the order status changes to its next stage. 
+
+## Delete Product Action 🗑️
+
+In delete button, set a onClick function calling a handleDelete function:
+
+```js
+<td>
+  <button className={styles.button}>Edit</button>
+  <button 
+    className={styles.button}
+    onClick={() => handleDelete(product._id)} // we have to pass the id because we're going to delete it with its id
+  >
+    Delete
+  </button>
+</td>
+```
+
+⚠️ Note: In map function, I've changed products for productList (to use the new useState() that you'll see below this) ⚠️
+
+And like always, at beginning function (above the return):
+
+```js
+// we have to create here two state hooks, because when we delete any product or order, it will delete in MongoDB but we have to refresh the components to see the real changes in the view
+  const [productList, setProductList] = useState(products);
+  const [orderList, setOrderList] = useState(orders);
+
+  const handleDelete = async (id) => {
+    try {
+      const res = await axios.delete("http://localhost:3000/api/products/" + id);
+      setProductList(productList.filter((product) => product._id !== id)); // for each product it going to check its id, if it's equal it's going to delete the product, else it's going to let the product like it was
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+```
+
+In the api for products ([id].js), change delete function for this:
+
+```js
+if (method === "DELETE") {
+  try {
+    await Product.findByIdAndDelete(id);
+    res.status(200).json("The product has been deleted!");
+    
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+```
+
+and ... delete action for products done!
+

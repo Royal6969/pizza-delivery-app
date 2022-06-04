@@ -19,9 +19,11 @@ const handler = async (req, res) => {
 
   if (method === "PUT") {
     try {
-      const order = await Order.findByIdAndUpdate(id, req.body, {
-        new: true,
-      });
+      const order = await Order.findByIdAndUpdate(id, req.body, // if we do this, it's not going to return to updated order, so to prevent this error...
+        {
+          new: true, // ... we should write here this, to return the nearest version
+        }
+      );
       res.status(200).json(order);
     
     } catch (err) {
