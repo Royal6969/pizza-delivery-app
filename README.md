@@ -1679,7 +1679,7 @@ const handleStatus = async (id) => {
 </button>
 ```
 
-And in its api (api --> orders --> [id].js) check the PUT method:
+And in its api (pages --> api --> orders --> [id].js) check the PUT method:
 
 ```js
 if (method === "PUT") {
@@ -1750,4 +1750,173 @@ if (method === "DELETE") {
 ```
 
 and ... delete action for products done!
+
+## Authentication Login Process 🛡️
+
+Let's go to pages --> api --> and create a new file called login.js
+Now we have to install a library called cookie:
+
+- npm install cookie
+
+Also you have to know that there's a library very used to set cookies in React called react-cookies.
+👨‍🏫 To learn more about this other library:
+https://reactgo.com/react-set-cookie/
+
+Basically we can create username and password in our .env file,
+and why we're doing that ??
+Because it's a single user application, we're not goiung to have multiple admins or any user,
+so basically we can assign our username and password and we can just use it (don't forget to assign a token too):
+
+```js
+MONGO_URL = mongodb+srv:.........................................................................
+ADMIN_USERNAME = ........
+ADMIN_PASSWORD = ........
+TOKEN = .................
+```
+
+⚠️ Note: restart the application each time you change the env file ⚠️
+
+Comming back to login.js, we have to import the cookie library, and create a handler function for login process (with a req/res) and export it.
+
+```js
+import cookie from 'cookie'
+
+const handler = (req, res) => {
+  if (req.method === "POST") { // if request method is POST we're going to try to handle login process
+    const { username, password } = req.body; // I'm going to take user name and password from request and body
+
+    if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+      res.setHeader( // if validations is correct, we're going to send a cookie
+        "Set-Cookie", 
+        cookie.serialize("token", process.env.TOKEN,
+        { // some options
+          maxAge: 60 * 60,    // 1 hour
+          sameSite: "strict",
+          path: "/",          // cookie for all app
+          // secure // you must set here secure option for https in production, but in developer mode we use http only
+        }
+      ))
+
+      res.status(200).json("Succesfull");
+    
+    } else {
+      res.status(400).json("Wrong credentials!");
+    }
+  }
+}
+
+export default handler
+```
+
+Now let's create a login page for our client side.
+In pages --> admin --> create a new jsx file called login (and its css file).
+(remember you name the file begining with lower case letter, 
+but the name function has to begin with upper case letter because it's a component, a page, a view)
+
+We start to define our three state hooks that we're going to use,
+first one for userName (null), second one for password (null), and third one for error (false). 
+Also define the useRouter hook because when we login as Admin we're not going to stay here in login page.
+
+```js
+const [username, setUsername] = useState(null);
+const [password, setPassword] = useState(null);
+const [error, setError] = useState(false);
+const router = useRouter();
+```
+
+⚠️ Note: It's probable that your instinct make you write username like userName, but to help to cookie library to recognize your user, username must be written with lower case letter ⚠️
+
+Inside return, create an structure like this:
+
+```js
+return (
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <h1>Admin Dashboard</h1>
+
+        <input 
+          type="username"
+          className={styles.input}
+          onChange={(e) => setUsername(e.target.value)} 
+        />
+
+        <input 
+          type="password"
+          className={styles.input}
+          onChange={(e) => setPassword(e.target.value)} 
+        />
+
+        <button className={styles.button} onClick={handleClick}>
+          Sign In
+        </button>
+
+        {error && <span className={styles.error}>Wrong Credentials!</span>}
+      </div>
+    </div>
+)
+```
+
+And to handle the button would be a function like this:
+
+```js
+const handleClick = async () => {
+    try {
+      await axios.post(
+        "http://localhost:3000/api/login",
+        {
+          username,
+          password
+        }
+      )
+
+      router("/admin");
+
+    } catch (err) {
+      // console.log(err);
+      setError(true); // we're handling the error
+    }
+}
+```
+
+![](./public/img/readme/login-page.png)
+![](./public/img/readme/login-token-test.png)
+
+So what about admin page we made before? I'm going to use cookies again,
+and if we don't have cookie or our token is not correct, we're going to be redirecting to login page again, but ... how can we do it?
+
+Let's go back to admin.jsx and for the server side props we can also check our cookie,
+remember all this function is happening in the server side so don't worry about cookie here.
+
+How we're going to take our request? In the getServerSideProps() function:
+
+```js
+export const getServerSideProps = async (ctx) => { // ctx = context
+  const myCookie = ctx.req?.cookies || ""; // if there's a request we're going to take cookie, and if there's no cookie it's going to be empty string
+
+  if (myCookie.token !== process.env.TOKEN) { // if myCookie doesn't equal to token...
+    // ... just block this process here and don't call any api request here
+    return {
+      redirect: { // this is a method for Next.js that we can use redirect and inside this object we can set:
+        destination: "/admin/login",
+        permanent: false
+      }
+    }
+  }
+
+  const productRes = await axios.get("http://localhost:3000/api/products");
+  const orderRes = await axios.get("http://localhost:3000/api/orders");
+
+  return {
+    props: {
+      orders: orderRes.data,
+      products: productRes.data
+    }
+  }
+}
+```
+
+I made a video to show you if you delete the cookie and refresh admin page, 
+you will exit from admin page being redirected to login page,
+but if you don't delete the cookie, if you refresh, you will still being in admin page:
+https://github.com/Royal6969/pizza-delivery-app/issues/5
 

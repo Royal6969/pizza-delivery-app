@@ -135,7 +135,19 @@ const Index = ({ orders, products }) => { // remember that file name begin in lo
   )
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (ctx) => { // ctx = context
+  const myCookie = ctx.req?.cookies || ""; // if there's a request we're going to take cookie, and if there's no cookie it's going to be empty string
+
+  if (myCookie.token !== process.env.TOKEN) { // if myCookie doesn't equal to token...
+    // ... just block this process here and don't call any api request here
+    return {
+      redirect: { // this is a method for Next.js that we can use redirect and inside this object we can set:
+        destination: "/admin/login",
+        permanent: false
+      }
+    }
+  }
+
   const productRes = await axios.get("http://localhost:3000/api/products");
   const orderRes = await axios.get("http://localhost:3000/api/orders");
 
