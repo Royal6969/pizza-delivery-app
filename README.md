@@ -1920,3 +1920,374 @@ you will exit from admin page being redirected to login page,
 but if you don't delete the cookie, if you refresh, you will still being in admin page:
 https://github.com/Royal6969/pizza-delivery-app/issues/5
 
+## Add Product Action ➕
+
+We have to go to index page (index.js in pages folder ... where is the home function).
+Firstly we have to set cookies for admin again in SSR function:
+
+```js
+export const getServerSideProps = async (ctx) => {
+  const myCookie = ctx.req?.cookies || "";
+  let admin = false;
+
+  if (myCookie.token === process.env.TOKEN) {
+    admin = true;
+  }
+
+  const res = await axios.get("http://localhost:3000/api/products"); // it's going to fetch all data, so we're going to use this response as a prop here
+  
+  // so, to do that, we should return our props
+  return {
+    props: { // <-- define props here
+      productList: res.data,
+      admin // the new prop for admin logged
+    }
+  }
+}
+```
+
+Don't forget to write our new prop in the function header
+
+```js
+export default function Home({ productList, admin }) {}
+```
+
+Now, we have to create a new component for add button and its css file (AddButton.jsx).
+
+```js
+import React from 'react'
+import styles from '../styles/AddButton.module.css'
+
+const AddButton = ({ setClose }) => {
+  return (
+    <div 
+      className={styles.mainAddButton}
+      onClick={() => setClose(false)}  // when I click this button I'm going to update my state to false
+    >
+      Add New Product
+    </div>
+  )
+}
+
+export default AddButton
+```
+
+When this button is pressed, it's going to show us a modal.
+To set it as open/close, we need to define a state hook in Home function.
+
+```js
+export default function Home({ productList, admin }) { // <-- set props here in function will use it
+  
+  const [close, setClose] = useState(true); // basically if it's true we're not going to see our modal, and if it's false we're going to open it here in this home page
+  
+  return (
+    <div className={styles.container}>
+
+      <Head>
+        <title>Pizza Delivery in Seville</title>
+        <meta name="description" content="Best pizza in the capital city" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Slider />
+
+      {admin && <AddButton setClose={setClose} />}
+
+      <ProductList productList={productList} /> {/* <-- set props here in component will use it */}
+
+      {!close && <Add setClose={setClose} />} {/* if it's not close call another component */}
+    </div>
+  );
+}
+```
+
+We have to create this second one component called Add.jsx
+
+Firstable, we have to pass the setClose prop
+
+```js
+const Add = ({ setClose }) => {} // we need the state to close/open modal as a prop
+```
+
+To wrap all content, let's make two div
+
+```js
+<div className={styles.container}>
+  <div className={styles.wrapper}>
+    ...
+  </div>
+</div>
+```
+
+For close button we make a span
+
+```js
+<span 
+  onClick={() => setClose(true)} // if we click this button it's going to be true again and the modal will close
+  className={styles.close}
+>
+  X
+</span> 
+```
+
+To choose an image
+
+```js
+<div className={styles.item}>
+  <label className={styles.label}>
+    Choose an image
+  </label>
+
+  <input type="file" onChange={(e) => setFile(e.target.files[0])}/> {/* [0] means we can't choose multiple files */}
+</div>
+```
+
+For title and description
+
+```js
+<div className={styles.item}>
+  <label className={styles.label}>Title</label>
+  <input
+    className={styles.input}
+    type="text"
+    onChange={(e) => setTitle(e.target.value)}
+  />
+</div>
+
+<div className={styles.item}>
+  <label className={styles.label}>Description</label>
+  <textarea
+    rows={4}
+    type="text"
+    onChange={(e) => setDescription(e.target.value)}
+  />
+</div>
+```
+
+For prices
+
+```js
+<div className={styles.item}>
+  <label className={styles.label}>Prices</label>
+  <div className={styles.priceContainer}>
+    <input
+      className={`${styles.input} ${styles.inputSmall}`} // we're creating one input for each pizza size
+      type="number"
+      placeholder="Small"
+      onChange={(e) => changePrice(e, 0)}
+    />
+    <input
+      className={`${styles.input} ${styles.inputSmall}`} // using multiple styles
+      type="number"
+      placeholder="Medium"
+      onChange={(e) => changePrice(e, 1)}
+    />
+    <input
+      className={`${styles.input} ${styles.inputSmall}`} // each input will be a litle bit smaller
+      type="number"
+      placeholder="Large"
+      onChange={(e) => changePrice(e, 2)}
+    />
+  </div>
+</div>
+```
+
+⚠️ Note: To use multiple classname, open backticks and to set one style, write dollar, open code brackets and choose your style.className, and for each one more, another ${style.className} ⚠️
+
+For extras, we're going to create two inputs and one button,
+first input is going to be extra text and second one will be its price,
+and that's way re're using extraOptions and extra,
+basically that extra is going to hold only the inputs
+
+```js
+<div className={styles.item}>
+  <label className={styles.label}>Extra</label>
+  <div className={styles.extra}>
+    <input
+      className={`${styles.input} ${styles.inputSm}`}
+      type="text"
+      placeholder="Item"
+      name="text"
+      onChange={handleExtraInput}
+    />
+    <input
+      className={`${styles.input} ${styles.inputSm}`}
+      type="number"
+      placeholder="Price"
+      name="price"
+      onChange={handleExtraInput}
+    />
+
+    <button className={styles.extraButton} onClick={handleExtra}>
+      Add
+    </button>
+  </div>
+          
+  <div className={styles.extraItems}>
+    {extraOptions.map((option) => (
+      <span key={option.text} className={styles.extraItem}>
+        {option.text}
+      </span>
+    ))}
+  </div>
+</div>
+
+<button className={styles.addButton} onClick={handleCreate}>
+  Create
+</button>
+```
+
+![](./public/img/readme/add-modal-view.png)
+
+All hooks that we're going to need and the functions for inputs are these
+
+```js
+  const [file, setFile] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [prices, setPrices] = useState([]);
+  const [extraOptions, setExtraOptions] = useState([]);
+  const [extra, setExtra] = useState(null);
+  // you can use just one state and change every item in one function
+
+  const handleExtraInput = (e) => {
+    setExtra({
+      ...extra, // previous version of extra
+      [e.target.name]: e.target.value // name and price // we can search for how to handle multiple inputs in one handler
+      // when we change those items it's going to update by using their value (name option in inputs)
+    })
+  }
+
+  const handleExtra = (e) => {
+    setExtraOptions((prev) => [ // previous one it's going to return
+      ...prev, // previous extra options // this is how to set state using previous data
+      extra // additionally these extra wich we have set in handleExtraInput function
+    ]);
+  }
+
+  const changePrice = (e, index) => {
+    // I'm going to find my current prices first and change its value and set prices after that 
+    const currentPrices = prices;
+    currentPrices[index] = e.target.value;
+    setPrices(currentPrices);
+  }
+
+  const handleCreate = async () => {
+    const data = new FormData();
+    
+    data.append("file", file);
+    data.append("upload_preset", "uploads") // to prevent 400 error bad request
+
+    try {
+      const uploadRes = await axios.post(
+        "https://api.cloudinary.com/v1_1/dxyivnn3n/image/upload", // https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload
+        data
+      );
+      // console.log(uploadRes.data);
+
+      const { url } = uploadRes.data; // to take the url from the image uoploaded
+      const newProduct = {
+        title,
+        description,
+        prices,
+        extraOptions,
+        image: url
+      };
+
+      await axios.post(
+        "http://localhost:3000/api/products",
+        newProduct
+      );
+
+      setClose(true); // we're receiving like a prop from Home function where it was a state hook
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+```
+
+👨‍🏫 To learn more about FormData()
+// https://devcamp.com/trails/comprehensive-react-development-tutorial/campsites/277/guides/working-form-data-react
+
+![](./public/img/readme/cloudinary-upload-image-test-1.png)
+![](./public/img/readme/cloudinary-storage-folder.png)
+
+⚠️ Note: Our way to upload images it's going to be using Cloudinary.
+You can create an account for free in teh website: https://cloudinary.com/
+and if you go to your dashboard, you will see your account information.
+After that, go to configuration, upload section, and add a new one upload preset called uploads.
+
+![](./public/img/readme/cloudinary-dashboard.png)
+![](./public/img/readme/cloudinary-upload-1.png)
+![](./public/img/readme/cloudinary-upload-2.png)
+![](./public/img/readme/cloudinary-upload-3.png)
+![](./public/img/readme/cloudinary-upload-4.png)
+
+⚠️ Note: first time you try to add a new product, you will have the following error ⚠️
+
+Server Error
+Error: Invalid src prop (http://res.cloudinary.com/dxyivnn3n/image/upload/v1654465538/uploads/ufkdfbe8xz0qkqts6xhb.png) on `next/image`, hostname "res.cloudinary.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+
+To prevent this error, we have to allow the Cloudinary domain our Next.js configuration. 
+In our root folder, we can find a file called next.config.js
+
+```js
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {
+//   reactStrictMode: true,
+// }
+
+// module.exports = nextConfig
+
+module.exports = {
+  images: {
+    domains: [ // to aloow images from a domain, just include its hostname in this array
+      "res.cloudinary.com"
+    ]
+  }
+}
+```
+
+If we restart our local server and run our application again, we will see it has worked.
+
+![](./public/img/readme/add-new-product-test.png)
+
+## Security access to Admin actions 👮
+
+As a customer we can get any product but a customer can't post any of them,
+so basically we can block this process for just normal users setting cookies in pages --> api --> products --> index.js
+
+```js
+export default async function handler(req, res) { 
+
+  const { 
+    method, 
+    cookies 
+  } = req;
+
+  const token = cookies.token;
+
+  await dbConnect();
+
+  // GET method here
+
+  if (method === "POST") {
+    if (!token || token !== process.env.TOKEN) {
+      return res.status(401).json("Not Authenticated!");
+    }
+
+    try {
+      const product = await Product.create(req.body);
+      res.status(201).json(product);
+
+    } catch (err) {
+      res.status(500).json(err); // return it directly becasuse I don't have any handler error
+    }
+  }
+}
+```
+
+To complete this security step, we can do the same but now in pages --> api --> products --> [id].js for PUT and DELETE methods.
+
