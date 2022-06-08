@@ -108,7 +108,7 @@ const Order = ({ order }) => {
 }
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`); // we're taking the id from parameters and making this api request
+  const res = await axios.get(`https://pizza-delivery-app-delta.vercel.app/api/orders/${params.id}`); // we're taking the id from parameters and making this api request
   return {
     props: { order: res.data },
   };
