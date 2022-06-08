@@ -174,7 +174,7 @@ const Product = ({ product }) => { // <-- props which function will use
 }
 
 export const getServerSideProps = async ({ params }) => { // params it's a type of prop which takes the product ID
-  const res = await axios.get(`http://localhost:3000/api/products/${params.id}`); // it's going to fetch the specific product with its ID (params)
+  const res = await axios.get(`https://pizza-delivery-app-delta.vercel.app/api/products/${params.id}`); // it's going to fetch the specific product with its ID (params)
   
   return {
     props: { // <-- props here

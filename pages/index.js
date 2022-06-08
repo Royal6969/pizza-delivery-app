@@ -40,7 +40,7 @@ export const getServerSideProps = async (ctx) => {
     admin = true;
   }
 
-  const res = await axios.get("http://localhost:3000/api/products"); // it's going to fetch all data, so we're going to use this response as a prop here
+  const res = await axios.get("https://pizza-delivery-app-delta.vercel.app/api/products"); // it's going to fetch all data, so we're going to use this response as a prop here
   
   // so, to do that, we should return our props
   return {

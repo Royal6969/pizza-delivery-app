@@ -12,7 +12,7 @@ const Index = ({ orders, products }) => { // remember that file name begin in lo
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete("http://localhost:3000/api/products/" + id);
+      const res = await axios.delete("https://pizza-delivery-app-delta.vercel.app/api/products/" + id);
       setProductList(productList.filter((product) => product._id !== id)); // for each product it going to check its id, if it's equal it's going to delete the product, else it's going to let the product like it was
 
     } catch (err) {
@@ -27,7 +27,7 @@ const Index = ({ orders, products }) => { // remember that file name begin in lo
     try {
       // it will return us the updated version of this order
       const res = await axios.put(
-        "http://localhost:3000/api/orders/" + id,
+        "https://pizza-delivery-app-delta.vercel.app/api/orders/" + id,
         { // we should send here what we're going to change (status)
           status: currentStatus + 1 // order found before current status +1
         }
@@ -148,8 +148,8 @@ export const getServerSideProps = async (ctx) => { // ctx = context
     }
   }
 
-  const productRes = await axios.get("http://localhost:3000/api/products");
-  const orderRes = await axios.get("http://localhost:3000/api/orders");
+  const productRes = await axios.get("https://pizza-delivery-app-delta.vercel.app/api/products");
+  const orderRes = await axios.get("https://pizza-delivery-app-delta.vercel.app/api/orders");
 
   return {
     props: {

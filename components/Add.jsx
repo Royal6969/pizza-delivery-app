@@ -57,7 +57,7 @@ const Add = ({ setClose }) => { // we need the state to close/open modal as a pr
       };
 
       await axios.post(
-        "http://localhost:3000/api/products",
+        "https://pizza-delivery-app-delta.vercel.app/api/products",
         newProduct
       );
 

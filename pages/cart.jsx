@@ -19,7 +19,7 @@ const Cart = () => {
   
   const createOrder = async (data) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/orders", data); // what API use to create the order and the data sent
+      const res = await axios.post("https://pizza-delivery-app-delta.vercel.app/api/orders", data); // what API use to create the order and the data sent
        
       // response control
       if (res.status === 201) {                 // if order is created

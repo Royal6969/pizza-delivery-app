@@ -2361,7 +2361,7 @@ export default async function handler(req, res) {
 
 To complete this security step, we can do the same but now in pages --> api --> products --> [id].js for PUT and DELETE methods.
 
-# What's next ??
+# What's next ?? 🤔
 
 At this point, I have considered that it is enough for this project (at least for the moment).
 Every application can be improved and extended to infinity,
