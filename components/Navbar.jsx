@@ -12,15 +12,18 @@ const Navbar = () => {
   return (
     <div className={styles.container}>
       {/* we're going to create 3 elements */}
-      <div className={styles.item}>
-        <div className={styles.callButton}>
-          <Image src="/img/telephone.png" alt="" width="32" height="32" /> {/* Next.js wants we use its own tag for img, and you have to import it ... and very important define a width/height or a layout="fill" */}
+
+      <Link href="/" passHref>
+        <div className={styles.item}>
+          <div className={styles.callButton}>
+            <Image src="/img/telephone.png" alt="" width="32" height="32" /> {/* Next.js wants we use its own tag for img, and you have to import it ... and very important define a width/height or a layout="fill" */}
+          </div>
+          <div className={styles.texts}>
+            <div className={styles.text}>ORDER NOW!</div>
+            <div className={styles.text}>954 70 17 01</div>
+          </div>
         </div>
-        <div className={styles.texts}>
-          <div className={styles.text}>ORDER NOW!</div>
-          <div className={styles.text}>954 70 17 01</div>
-        </div>
-      </div>
+      </Link>
       
       <div className={styles.item}>
         <ul className={styles.list}>
@@ -34,7 +37,9 @@ const Navbar = () => {
             <a target="_blank" href="https://carta-pizza-delivery-app.web.app/" rel="noopener noreferrer">Carta</a>
           </li>
           <Image src="/img/logo-no-bg.png" alt='' width="160px" height="110px" />
-          <li className={styles.listItem}>Events</li>
+          <li className={styles.listItem}>
+            <a target="_blank" href="https://github.com/Royal6969/pizza-delivery-app" rel="noopener noreferrer">GitHub</a>
+          </li>
           <Link href="/admin" passHref>
             <li className={styles.listItem}>Admin</li>
           </Link>

@@ -2361,7 +2361,7 @@ export default async function handler(req, res) {
 
 To complete this security step, we can do the same but now in pages --> api --> products --> [id].js for PUT and DELETE methods.
 
-# What's next ?? 🤔
+# 🤔 What's next ?? 🤔
 
 At this point, I have considered that it is enough for this project (at least for the moment).
 Every application can be improved and extended to infinity,
@@ -2374,15 +2374,26 @@ If you've managed to get here, I congratulate you, you're amazing, but... as hom
 4. Add Stripe payment method to allow customers to pay with card.
 5. You can create and separate different categories of products, like pizzas, burgers, kebabs, etc... and paginate the results!
 
+# 🌐 Deployment in Vercel 🌐
+
+To deploy this application in Internet, the creators of Next.js also developed an application deployment platform, 
+exclusively for applications made in Next.js (although of course, it also supports other frameworks).
+
+I think it's not necessary to explain how Vercel works because it's extremely easy to deploy an application there.
+Just login in Vercel with GitHub for example, create a new app inside Vercel user dashboard, and go to Deployments section to choose a repository of your GitHub and see how Vercel automatically deploys for you your project.
+If there is no error while it's deploying, at the end, Vercel give you three free domains to access publicly to your application in Internet.
+
+https://vercel.com/
+
 # 👨‍🏫😌❤️ Agradecimientos Especiales ❤️😌👨‍🏫
 
-Me gustaría dedicar este proyecto a mi profesor de Despliegue de Aplicaciones Web,
-que pese a las dierentes creencias, métodos docentes y aplicaciones de la autoridad,
+Me gustaría dedicar este proyecto a mi gran profesor de Despliegue de Aplicaciones Web,
+que pese a algunas diferencias sobre los métodos docentes, aplicaciones de la autoridad o creencias,
 siempre debemos mantener la unidad e intentar avanzar juntos por el mismo camino para conseguir los objetivos propuestos.
 Porque solemos tender, algunas veces, a fijarnos sólo en los aspectos negativos que quizás no nos gusten,
 y es que la clave de la auto superación diaria se basa en valorar más los aspectos positivos,
 una práctica que debemos seguir entrenando cada día, y decirnos con más frecuencia las virtudes que cada uno ve en su prójimo,
-porque sólo la perfecta mezcla entra amor y autoridad pueden llegar a hacer a un verdadero líder,
+porque sólo la perfecta mezcla entre amor y autoridad pueden llegar a hacer a un verdadero líder,
 un verdadero líder que consigue la mejor sinergia en su equipo, y un equipo que consigue hacer el mejor trabajo posible.
 
 Muchas gracias por todo profesor. Reciba un cordial saludo de su alumno.
