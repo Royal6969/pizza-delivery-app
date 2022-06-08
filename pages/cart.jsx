@@ -33,7 +33,7 @@ const Cart = () => {
   }
 
   // This values are the props in the UI
-  const amount = cart.total;
+  const amount = cart.total * 1.21;
   const currency = "EUR";
   const style = {"layout":"vertical"};
 
@@ -159,7 +159,7 @@ const Cart = () => {
             <b className={styles.totalTextTitle}>IVA 21%:</b> {cart.total * 0.21}€
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>Discount:</b> 0,00€
+            <b className={styles.totalTextTitle}>Discount:</b> 0.00€
           </div>
           <div className={styles.totalText}>
             <b className={styles.totalTextTitle}>Total:</b> {cart.total * 1.21}€

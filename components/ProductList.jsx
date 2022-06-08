@@ -5,8 +5,14 @@ import ProductCard from './ProductCard'
 const ProductList = ({ productList }) => { // <-- props here
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>THE BEST FIZZA FOR GOLFOS</h1>
-      <p className={styles.description}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae provident quis laborum repudiandae explicabo dolores error, illum inventore perferendis reiciendis placeat quaerat, rem eum laudantium similique itaque earum odio corporis modi. Laudantium, sint, voluptatem quasi veniam inventore voluptas sit officiis suscipit ipsa cumque ea id beatae itaque vel voluptates natus!</p>
+      <h1 className={styles.title}>THE BEST PIZZA FOR FAST FOOD LOVERS</h1>
+      <p className={styles.description} id="products">
+        🍕 The best selection of most popular pizzas in Seville 🍕<br />
+        🍟🍔🌯 Also we have chips, burgers and kebaps 🍟🍔🌯<br />
+        📱 Make your order here 📱 <br />
+        💳 pay with paypal or cash in delivery 💶<br />
+        🤩 and enjoy your moment with whoever and wherever 😋
+      </p>
       
       <div className={styles.wrapper}>
           {/* <ProductCard/>

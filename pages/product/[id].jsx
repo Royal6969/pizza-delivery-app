@@ -103,8 +103,8 @@ const Product = ({ product }) => { // <-- props which function will use
 
         <div className={styles.right}>
           <h1 className={styles.title}>{product.title}</h1>
-          {/* <span className={styles.price}>${product.prices[size]}</span> */}
-          <span className={styles.price}>${price}</span>
+          {/* <span className={styles.price}>{product.prices[size]}€</span> */}
+          <span className={styles.price}>{price}€</span>
           <p className={styles.description}>{product.description}</p>
 
           <h3 className={styles.choose}>Choose the size</h3>

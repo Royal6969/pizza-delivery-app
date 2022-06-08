@@ -1,22 +1,29 @@
-## 🆕 To create this app run the following command
+## To create this app run the following command 🆕
+
 - npx create-next-app pizza-delivery-app
 
-## 💻 To serve the app in localhost
+## To serve the app in localhost 💻
+
 - npm run dev
 
-## ⏱ To follow my commit changes
+## To follow my commit changes ⏱
+
 https://github.com/Royal6969/pizza-delivery-app/commits/main
 
 https://pizza-delivery-app-delta.vercel.app/
 
-# 👓 First steps
+# 👓 First steps 👓
+
 Traditionally, we start with a default template that you can see in index.js.
 Delete all main and footer tags.
 Create your own basic components to start: Navbar - Layout - Footer,
 but the Navbar and Footer will be jsx files, to rendering them better.
-(jsx is an js extension very useful for develop the UI) --> https://es.reactjs.org/docs/introducing-jsx.html
+(jsx is an js extension very useful for develop the UI) --> 
 
-## 🔮 Best Next.js features
+https://es.reactjs.org/docs/introducing-jsx.html
+
+## Best Next.js features 🔮
+
 Next.js has two forms of pre-rendering: Static Generation and Server-side Rendering. The difference is in when it generates the HTML for a page.
 
 Static Generation (Recommended): The HTML is generated at build time and will be reused on each request.
@@ -27,7 +34,8 @@ We recommend using Static Generation over Server-side Rendering for performance 
 
 You can also use Client-side Rendering along with Static Generation or Server-side Rendering. That means some parts of a page can be rendered entirely by client side JavaScript.
 
-## 🔁 What is Server Side Rendering ?
+## What is Server Side Rendering? 🔁
+
 If a page uses Server-side Rendering, the page HTML is generated on each request.
 
 To use Server-side Rendering for a page, you need to export an async function called getServerSideProps. This function will be called by the server on every request.
@@ -36,12 +44,26 @@ For example, suppose that your page needs to pre-render frequently updated data 
 
 getServerSideProps is similar to getStaticProps, but the difference is that getServerSideProps is run on every request instead of on build time.
 
+What is a prop??
+"Props" is a special keyword in React, which stands for properties and is being used for passing data from one component to another. 
+Furthermore, props data is read-only, which means that data coming from the parent should not be changed by child components.
+
+👨‍🏫 To learn more about props with its official documentation:
+
+https://es.reactjs.org/docs/components-and-props.html
+
+👨‍🏫 To learn more about props with a video example:
+
+https://www.youtube.com/watch?v=kHJSNFU7H4U&t=2s&ab_channel=SonnySangha
+
 👨‍🏫 To learn more Next.js basic concepts:
+
 https://nextjs.org/learn/foundations/about-nextjs?utm_source=next-site&utm_medium=homepage-cta&utm_campaign=next-website
 
 https://nextjs.org/docs/basic-features/pages
 
-## 📝 Basic structure to start
+## Basic structure to start 📝
+
 In our Layout component, we're going to set the Navbar and Footer,
 and it has a type of "prop content" called {{children}}, 
 becasuse these children will be all the other components inside the other pages,
@@ -55,10 +77,8 @@ and we will wrap it with our Layout component.
 If we serve the app in this moment, we will see in our browser that we can see the navbar at top, the footer at bottom, 
 and inside them (between them), we can see the word "homepage" which we wrote before in index.js
 
-👨‍🏫 To learn more about props:
-https://www.youtube.com/watch?v=kHJSNFU7H4U&t=2s&ab_channel=SonnySangha
+## Create our first example page 👶
 
-## 👶 Create our first example page
 Go ahead into pages folder, and create a new file, called "about" for example.
 I recommend you to install a VS extension that provides you a React syntax snippet to start coding faster any component or page.
 So I have it, and if a just write "rafce" I get a snippet called "react arrow function export component".
@@ -67,7 +87,8 @@ wow! it looks like something magic...
 
 ⚠️ Note: Pages components has to be named with lower initial letter. ⚠️
 
-## 🎨 For the css ...
+## For the css 🎨
+
 We are going to use the css modules.
 So to code the styles for one component or page,
 we go into styles folder and create a new file called, for example, Navbar.module.css,
@@ -75,15 +96,17 @@ Now we back to Navbar.jsx to import this new style file:
 import styles from "../styles/Navbar.module.css"
 And now we can set styles in our html tags with className={styles.container}
 
-# Let's start with frontend
+# 🖌️ Let's start with frontend 🖌️
 
 ## 0️⃣ Navbar component 🗺️
+
 Don't use <img> tag, use better <Image> tag provides by Next.js.
 It's very common and a noob mistake that we experiment an error like this:
 Server Error --> Error: Image with src "/img/telephone.png" must use "width" and "height" properties or "layout='fill'" property.
 This error says us we have to define a width/height for the Image
 
 ## 1️⃣ Slider component 🎞️
+
 Remember to start with the basic template provides by the snnipet "raf" React Arrow Function Export Component, and now remember to call it in de Index.js, under the <Head>.
 
 To go next/prev image in slider, I need to define a stateHook for an index.
@@ -95,11 +118,13 @@ The stateHook will begin in 0 --> const [index, setIndex] = useState(0)
 in 0 because 0 will be the main image (first item (image) in slider)
 
 👨‍🏫 To learn more about the useState() hook, visit:
+
 https://www.coffeeclass.io/articles/nextjs-usestate
 
 ![slider](./public/img/readme/slider.png)
 
 ## 2️⃣ ProductList and ProductCard components 📋
+
 Once again, we start creating two new component like jsx files,
 and two new modules.css, connect both component between them,
 (insert a few ProductCard inside the ProductList and insert the ProductList under the Slider in the index.js)
@@ -108,6 +133,7 @@ The rest is pure html and css.
 ![product-list](./public/img/readme/product-list.png)
 
 ## 3️⃣ Product Page Design 🍕
+
 Now, it's time to get the product id to go into its details.
 Inside pages folder, let's create a new folder called "product",
 and inside it, create the id generator file (with jsx extension) with the name between squeare brackets,
@@ -124,6 +150,7 @@ but this time, from a Click event !
 ![product-page](./public/img/readme/product-page.png)
 
 ## 4️⃣ Shopping Cart Design 🛒
+
 I create a new jsx file in Pages folder, without its own folder,
 because it would be an independent page.
 Like you alredy know, let's start with the "rafce" snippet,
@@ -135,6 +162,7 @@ second, the checkout container.
 ![cart-page](./public/img/readme/cart.png)
 
 ## 5️⃣ Order Tracking Page Design
+
 I create a new folder called "orders" and inside it, 
 like the productPage, we create the [id].jsx file (rename it inside the file to Order),
 because we're going to fetch data according the id.
@@ -149,6 +177,7 @@ It will change automatically with an index and with three simple conditions.
 ![orders-page](./public/img/readme/orders-page.png)
 
 ## 6️⃣ Responsive Design
+
 Let's make the design responsive, and to start,
 you have to enable the "inspect view" in Chrome (or other browser),
 and press the "mobile view" button at the top right screen,
@@ -161,10 +190,12 @@ before...
 ... and after.
 
 👨‍🏫 To learn more about breakpoints for responsive designs:
+
 https://www.lambdatest.com/blog/how-to-use-css-breakpoints-for-responsive-design/
 
 
 ## Frontend finished !
+
 In next steps, we're going to create our own API,
 we're going to set up the database in MongoDB,
 we're going to add our products,
@@ -173,7 +204,7 @@ and a user will be able to buy any products,
 and we're going to activate our checkout button,
 with an official payment method... 🤯
 
-# Now it's time to backend 👨‍💻
+# 👨‍💻 Now it's time to backend 👨‍💻
 
 ## MongoDB SetUp 📚
 
@@ -187,9 +218,11 @@ The Community version of our distributed database offers a flexible document dat
 secondary indexing, and real-time aggregations to provide powerful ways to access and analyze your data.
 
 To download MongoDB Community:
+
 https://www.mongodb.com/try/download/community
 
 For more information about how to install (MongoDB Manual):
+
 https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
 
 ![](./public/img/readme/mongodb-community-download.png)
@@ -197,10 +230,12 @@ https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
 MongoDB Compass is a powerful GUI for querying, aggregating, and analyzing your MongoDB data in a visual environment. 
 Compass is free to use and source available, and can be run on macOS, Windows, and Linux.
 
-To download MongoDB Compass:
+To download MongoDB Compass (optional):
+
 https://www.mongodb.com/try/download/compass
 
 For more information about Compass:
+
 https://www.mongodb.com/es/products/compass
 
 ![](./public/img/readme/mongodb-compass-download.png)
@@ -220,6 +255,7 @@ Now follow the steps:
 ![](./public/img/readme/mongodb-add-ip-access.png)
 
 Video Example:
+
 https://www.youtube.com/watch?v=esKNjzDZItQ&t=529s
 
 To connect the cluster to our app,
@@ -246,12 +282,15 @@ You just create a new file called .env in your project and slap your variables i
 To read these values, there are a couple of options, but the easiest is to use the dotenv package from npm.
 
 👨‍🏫 To learn more about .env file:
+
 https://www.youtube.com/watch?v=KJE4LtAxLEw&ab_channel=Bitfumes
 
 👨‍🏫 To learn about dotenv library:
+
 https://www.youtube.com/watch?v=hZUNMYU4Kzo&ab_channel=dcode
 
 👨‍🏫 To learn how to hide api keys in .env when push code to github:
+
 https://www.youtube.com/watch?v=17UVejOw3zA&ab_channel=TheCodingTrain
 
 Now, you need to install mongoose with npm to connect our project with MongoDB Atlas:
@@ -259,6 +298,7 @@ Now, you need to install mongoose with npm to connect our project with MongoDB A
 - npm install mongoose
 
 And finally, to connect it, we're going to use and example code provides by Next.js team:
+
 https://github.com/vercel/next.js/blob/canary/examples/with-mongodb-mongoose/lib/dbConnect.js
 
 The variable "cached" with all connections we need to do with MongoDB along the project and execution.
@@ -482,7 +522,7 @@ export default async function handler(req, res) { // we make this function async
 }
 ```
 
-### Insert documents in database by PostMan or MongoDB Atlas 📄
+## Insert documents in database by PostMan or MongoDB Atlas 📄
 
 To do this, you can choose between two options to test data:
 
@@ -495,13 +535,16 @@ through which we obtain different types of responses that need to be subsequentl
 
 You can manage your API request by Postman directly its web,
 but if you prefer, you can download and install in your pc:
+
 https://www.postman.com/downloads/
 
 To avoid CORS limitations and to use PostMan with localhost,
 you need to install PostMan Desktop Agent:
+
 https://www.postman.com/downloads/
 
 Here you have a useful video from PostMan YouTube channel:
+
 https://www.youtube.com/watch?v=6xlJUx2ZMy4&ab_channel=Postman
 
 ![](./public/img/readme/postman-insert-document-automatically.png)
@@ -540,6 +583,7 @@ Create two more documents till hace pizza-1, pizza-2 and pizza-3.
 ```
 
 To see how to insert/edit documents manually in MongoDB Atlas:
+
 https://github.com/Royal6969/pizza-delivery-app/issues/3
 
 ## Fetch data in Next.js with ServerSideRendering and Axios 🔁
@@ -568,6 +612,7 @@ Axios makes it easy to send asynchronous HTTP requests to REST endpoints and per
 It can be used in plain JavaScript or with a library such as Vue or React.
 
 👨‍🏫 To learn more about Axios, visit its official website:
+
 https://axios-http.com/docs/intro
 
 Now, in main index.js file in pages folder ...
@@ -675,6 +720,7 @@ we need to import Link from Next,
 and wrap between Link tags the element we want the user touch to navigate.
 
 ⚠️ Note: Be careful with extra spaces inside Link tags ... Next.js will undertand it like you're defining more children and it is not allow. ⚠️
+
 https://stackoverflow.com/questions/61651497/next-js-error-react-children-only-expected-to-receive-a-single-react-element-c
 
 Our first Link will be in ProductCard.jsx, for the pizza image,
@@ -928,6 +974,7 @@ if this item and id is not equal to this option id,
 just keep them inside if they are equal just removing using this filter
 
 Video test selecting ingredients:
+
 https://github.com/Royal6969/pizza-delivery-app/issues/4
 
 ## How to pass products to cart component and how it manages them by itself 📦
@@ -953,12 +1000,15 @@ that behave consistently across client, server, and native environments and are 
 While it's mostly used as a state management tool with React, you can use it with any other JavaScript framework or library.
 
 In simple words, Redux is a store to store and management the state of the variables in your app.
+
 https://medium.com/swlh/what-is-redux-b16b42b33820
 
 👨‍🏫 To learn more about Redux and how to use as framework too, visit its official website:
+
 https://redux.js.org/introduction/installation
 
 And the official website in collaboration with React:
+
 https://react-redux.js.org/introduction/getting-started
 
 Now, you have to create a new folder called redux in root level project folder,
@@ -970,6 +1020,7 @@ typically defined together in a single file.
 The name comes from splitting up the root Redux state object into multiple "slices" of state.
 
 👨‍🏫 To learn more about slices in Redux:
+
 https://redux.js.org/tutorials/essentials/part-2-app-structure#:~:text=A%20%22slice%22%20is%20a%20collection,multiple%20%22slices%22%20of%20state.
 
 Now in the new slice file, we have to create a cart slice, with a name, with a initial state and with its reducer...
@@ -1127,15 +1178,20 @@ To do that, we need to go to [id].jsx file (product) and in AddToCart buuton, ca
 ```
 
 Now we have to import another react-redux's hook called useDispatch, and import the action in slice you want to use too,
+
 ```js
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../redux/cartSlice';
 ```
+
 declare a const called dispatch = useDispatch(); to use its actions,
+
 ```js
 const dispatch = useDispatch();
 ```
+
 and the handleClick would be:
+
 ```js
 const handleClick = () => {
     dispatch(
@@ -1152,11 +1208,13 @@ const handleClick = () => {
 ```
 
 ⚠️ Note: don't forget, in navbar.jsx, to wrap between <Link> tags provides by Next.js, the shopping cart button ⚠️
+
 ```js
 <Link href="/cart" passHref></Link>
 ```
 
 👨‍🏫 To learn more about react-redux hooks:
+
 https://react-redux.js.org/api/hooks
 
 ## Let's use all information of products selected in cart page 🛒
@@ -1222,6 +1280,7 @@ export default Cart
 - npm install @paypal/react-paypal-js
 
 Let's take an example from PayPal GitHub documentation:
+
 https://paypal.github.io/react-paypal-js/?path=/docs/example-paypalbuttons--default
 
 Basically, we're going to give our options, like amount, our currency and our button style,
@@ -1275,6 +1334,7 @@ if open is true, show me paypal button, else just show me checkout button
 Access to XMLHttpRequest at 'https://www.sandbox.paypal.com/xoplatform/logger/api/logger' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 
 To get our personal paypal client-id, you have to create an account in PayPal Developer:
+
 https://developer.paypal.com/home
 
 1. Create a sandbox (select business account and your country)
@@ -1394,6 +1454,7 @@ const router = useRouter();
 See file commit changes to see full code in cart.jsx file.
 
 Now we have to come back yo cartSlice.js to remodel the order reset action:
+
 ```js
 // when we make our payments, we're going to go to the order page and we're going to reset our cart here so it's going to be 0 again
   reset: (state) => {
@@ -1416,6 +1477,7 @@ After that, set "order" as the main prop in function, and now you can interpolat
 
 When user clicks in CashOnDelivery button, it's going to open a modal and it's going to ask for name, address and other informations.
 Go to cart.jsx again, to define a new state hook:
+
 ```js
 const [cash, setCash] = useState(false);
 ...
@@ -1486,6 +1548,7 @@ export default CashModal
 ⚠️ Note: Check styles in mi GitHub ⚠️
 
 Go back to cart.jsx to call CashModal component with a condition:
+
 ```js
 {cash && ( // if cash state is true
   <CashModal total={cart.total} createOrder={createOrder} /> // call to CashModal component and pass order total to create an order ... and them would be the props in CashModal.jsx
@@ -1760,6 +1823,7 @@ Now we have to install a library called cookie:
 
 Also you have to know that there's a library very used to set cookies in React called react-cookies.
 👨‍🏫 To learn more about this other library:
+
 https://reactgo.com/react-set-cookie/
 
 Basically we can create username and password in our .env file,
@@ -1918,6 +1982,7 @@ export const getServerSideProps = async (ctx) => { // ctx = context
 I made a video to show you if you delete the cookie and refresh admin page, 
 you will exit from admin page being redirected to login page,
 but if you don't delete the cookie, if you refresh, you will still being in admin page:
+
 https://github.com/Royal6969/pizza-delivery-app/issues/5
 
 ## Add Product Action ➕
@@ -2208,6 +2273,7 @@ All hooks that we're going to need and the functions for inputs are these
 ```
 
 👨‍🏫 To learn more about FormData()
+
 // https://devcamp.com/trails/comprehensive-react-development-tutorial/campsites/277/guides/working-form-data-react
 
 ![](./public/img/readme/cloudinary-upload-image-test-1.png)
@@ -2228,7 +2294,9 @@ After that, go to configuration, upload section, and add a new one upload preset
 
 Server Error
 Error: Invalid src prop (http://res.cloudinary.com/dxyivnn3n/image/upload/v1654465538/uploads/ufkdfbe8xz0qkqts6xhb.png) on `next/image`, hostname "res.cloudinary.com" is not configured under images in your `next.config.js`
-See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+See more info: 
+
+https://nextjs.org/docs/messages/next-image-unconfigured-host
 
 To prevent this error, we have to allow the Cloudinary domain our Next.js configuration. 
 In our root folder, we can find a file called next.config.js
@@ -2243,7 +2311,7 @@ In our root folder, we can find a file called next.config.js
 
 module.exports = {
   images: {
-    domains: [ // to aloow images from a domain, just include its hostname in this array
+    domains: [ // to allow images from a domain, just include its hostname in this array
       "res.cloudinary.com"
     ]
   }
@@ -2253,6 +2321,8 @@ module.exports = {
 If we restart our local server and run our application again, we will see it has worked.
 
 ![](./public/img/readme/add-new-product-test.png)
+
+⚠️ The images are public domain and have been downloaded from: https://www.freepng.es/ ⚠️
 
 ## Security access to Admin actions 👮
 
@@ -2291,3 +2361,28 @@ export default async function handler(req, res) {
 
 To complete this security step, we can do the same but now in pages --> api --> products --> [id].js for PUT and DELETE methods.
 
+# What's next ??
+
+At this point, I have considered that it is enough for this project (at least for the moment).
+Every application can be improved and extended to infinity,
+And with everything we've done to get here, you can consider yourself ready to venture into any Next.js project.
+If you've managed to get here, I congratulate you, you're amazing, but... as homework, I'll leave you some ideas on how to continue developing this application.
+
+1. To protect better admin actions from user access, you can create a middleware and you can check your authentication.
+2. Integrate and adapt the other little website for menu (products) like it was another react component/page (a jsx file) ... with its SSR function to get the products, or even creating an order and redirecting to cart page from there.
+3. Try to develop the Edit Product Action for Admin page.
+4. Add Stripe payment method to allow customers to pay with card.
+5. You can create and separate different categories of products, like pizzas, burgers, kebabs, etc... and paginate the results!
+
+# 👨‍🏫😌❤️ Agradecimientos Especiales ❤️😌👨‍🏫
+
+Me gustaría dedicar este proyecto a mi profesor de Despliegue de Aplicaciones Web,
+que pese a las dierentes creencias, métodos docentes y aplicaciones de la autoridad,
+siempre debemos mantener la unidad e intentar avanzar juntos por el mismo camino para conseguir los objetivos propuestos.
+Porque solemos tender, algunas veces, a fijarnos sólo en los aspectos negativos que quizás no nos gusten,
+y es que la clave de la auto superación diaria se basa en valorar más los aspectos positivos,
+una práctica que debemos seguir entrenando cada día, y decirnos con más frecuencia las virtudes que cada uno ve en su prójimo,
+porque sólo la perfecta mezcla entra amor y autoridad pueden llegar a hacer a un verdadero líder,
+un verdadero líder que consigue la mejor sinergia en su equipo, y un equipo que consigue hacer el mejor trabajo posible.
+
+Muchas gracias por todo profesor. Reciba un cordial saludo de su alumno.

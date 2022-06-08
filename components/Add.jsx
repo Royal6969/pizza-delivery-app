@@ -101,7 +101,7 @@ const Add = ({ setClose }) => { // we need the state to close/open modal as a pr
           <div className={styles.item}>
             <label className={styles.label}>Description</label>
             <textarea
-              rows={4}
+              rows={10}
               type="text"
               onChange={(e) => setDescription(e.target.value)}
             />
