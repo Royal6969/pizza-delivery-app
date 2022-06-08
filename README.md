@@ -1,3 +1,52 @@
+# Table Of Contents
+<!-- TOC -->
+
+- [Table Of Contents](#table-of-contents)
+    - [To create this app run the following command 🆕](#to-create-this-app-run-the-following-command-)
+    - [To serve the app in localhost 💻](#to-serve-the-app-in-localhost-)
+    - [To follow my commit changes ⏱](#to-follow-my-commit-changes-⏱)
+- [👓 First steps 👓](#-first-steps-)
+    - [Best Next.js features 🔮](#best-nextjs-features-)
+    - [What is Server Side Rendering? 🔁](#what-is-server-side-rendering-)
+    - [Basic structure to start 📝](#basic-structure-to-start-)
+    - [Create our first example page 👶](#create-our-first-example-page-)
+    - [For the css 🎨](#for-the-css-)
+- [🖌️ Let's start with frontend 🖌️](#-lets-start-with-frontend-)
+    - [0 ️⃣ Navbar component 🗺️](#0-️⃣-navbar-component-)
+    - [1 ️⃣ Slider component 🎞️](#1-️⃣-slider-component-)
+    - [2 ️⃣ ProductList and ProductCard components 📋](#2-️⃣-productlist-and-productcard-components-)
+    - [3 ️⃣ Product Page Design 🍕](#3-️⃣-product-page-design-)
+    - [4 ️⃣ Shopping Cart Design 🛒](#4-️⃣-shopping-cart-design-)
+    - [5 ️⃣ Order Tracking Page Design](#5-️⃣-order-tracking-page-design)
+    - [6 ️⃣ Responsive Design](#6-️⃣-responsive-design)
+    - [Frontend finished !](#frontend-finished-)
+- [👨‍💻 Now it's time to backend 👨‍💻](#‍-now-its-time-to-backend-‍)
+    - [MongoDB SetUp 📚](#mongodb-setup-)
+    - [Create our main two models 🤖](#create-our-main-two-models-)
+    - [How to use these models 🤷🏻‍♂️](#how-to-use-these-models-‍)
+    - [Insert documents in database by PostMan or MongoDB Atlas 📄](#insert-documents-in-database-by-postman-or-mongodb-atlas-)
+    - [Fetch data in Next.js with ServerSideRendering and Axios 🔁](#fetch-data-in-nextjs-with-serversiderendering-and-axios-)
+    - [Navigation - Linking components 🔗](#navigation---linking-components-)
+    - [Fetch a specific product 🔎](#fetch-a-specific-product-)
+    - [Select sizes, ingredients, quantity and change price 🛍️](#select-sizes-ingredients-quantity-and-change-price-)
+    - [How to pass products to cart component and how it manages them by itself 📦](#how-to-pass-products-to-cart-component-and-how-it-manages-them-by-itself-)
+    - [How to use the slice and its reducer ⚙️](#how-to-use-the-slice-and-its-reducer-)
+    - [How to update the badget's counter in shopping cart icon in navbar 🔢](#how-to-update-the-badgets-counter-in-shopping-cart-icon-in-navbar-)
+    - [Let's use all information of products selected in cart page 🛒](#lets-use-all-information-of-products-selected-in-cart-page-)
+    - [Add a payment method. PayPal button 💳](#add-a-payment-method-paypal-button-)
+    - [What this payment process return us? Creating an order.](#what-this-payment-process-return-us-creating-an-order)
+    - [Implementing Cash Payment Method 💸](#implementing-cash-payment-method-)
+- [👔 Admin Actions - Management Functionalities 👔](#-admin-actions---management-functionalities-)
+    - [Delete Product Action 🗑️](#delete-product-action-)
+    - [Authentication Login Process 🛡️](#authentication-login-process-)
+    - [Add Product Action ➕](#add-product-action-)
+    - [Security access to Admin actions 👮](#security-access-to-admin-actions-)
+- [🤔 What's next ?? 🤔](#-whats-next--)
+- [🌐 Deployment in Vercel 🌐](#-deployment-in-vercel-)
+- [👨‍🏫😌❤️ Agradecimientos Especiales ❤️😌👨‍🏫](#‍-agradecimientos-especiales-‍)
+
+<!-- /TOC -->
+
 ## To create this app run the following command 🆕
 
 - npx create-next-app pizza-delivery-app
